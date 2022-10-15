@@ -5,13 +5,23 @@ namespace TesteCbr.DbContext
 {
     public class TraducaoContext
     {
-        string conectStrig = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=TesteCbr;Integrated Security=True";
+        string conectString;
+
+        public TraducaoContext()
+        {
+            IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            conectString = configuration.GetConnectionString("Banco");
+        }
 
         public List<TraducaoModel> getTraducao(int idSite, string palavra, string chave)
         {
             var traducoes = new List<TraducaoModel>();
 
-            using (SqlConnection conection = new SqlConnection(conectStrig))
+            using (SqlConnection conection = new SqlConnection(conectString))
             {
                 conection.Open();
                 using (SqlCommand sqlCommand = new SqlCommand("BuscaPalavrasNova", conection))
