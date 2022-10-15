@@ -7,7 +7,7 @@ namespace TesteCbr.DbContext
     {
         string conectStrig = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=TesteCbr;Integrated Security=True";
 
-        public List<TraducaoModel> getAllTraducao()
+        public List<TraducaoModel> getTraducao(int idSite, string palavra, string chave)
         {
             var traducoes = new List<TraducaoModel>();
 
@@ -17,14 +17,15 @@ namespace TesteCbr.DbContext
                 using (SqlCommand sqlCommand = new SqlCommand("BuscaPalavrasNova", conection))
                 {
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@IDSITE", 1);
-                    sqlCommand.Parameters.AddWithValue("@Palavra", "<10mm");
-                    sqlCommand.Parameters.AddWithValue("@CHAVE", "TESTE");
+                    sqlCommand.Parameters.AddWithValue("@IDSITE", idSite);
+                    sqlCommand.Parameters.AddWithValue("@Palavra", palavra);
+                    sqlCommand.Parameters.AddWithValue("@CHAVE", chave);
                     using (SqlDataReader reader = sqlCommand.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             var traducao = new TraducaoModel();
+                            var t = reader.Cast<TraducaoModel>();
                             traducao.Id = int.Parse(reader["ID"].ToString());
                             traducao.PreferredLabel = reader["Preferred Label"].ToString();
                             traducao.Confirmar = reader["Confirmar"].ToString();

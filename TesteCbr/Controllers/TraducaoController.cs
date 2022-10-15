@@ -18,10 +18,10 @@ namespace TesteCbr.Controllers
         }
 
         // GET: api/<TraducaoController>
-        [HttpGet]
-        public IEnumerable<TraducaoModel> Get()
+        [HttpGet("{IDSITE}/{Palavra}/{CHAVE}")]
+        public IEnumerable<TraducaoModel> Get(int IDSITE, string Palavra, string CHAVE)
         {
-            return _traducaoService.GetAllTraducoes();
+            return _traducaoService.GetTraducoes(IDSITE, Palavra, CHAVE);
         }
 
         // GET api/<TraducaoController>/5

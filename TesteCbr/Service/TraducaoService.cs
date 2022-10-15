@@ -12,9 +12,9 @@ namespace TesteCbr.Service
             _traducaoContext = new TraducaoContext();
         }
 
-        public List<TraducaoModel> GetAllTraducoes()
+        public List<TraducaoModel> GetTraducoes(int idSite, string palavra, string chave)
         {
-            var response =_traducaoContext.getAllTraducao();
+            var response =_traducaoContext.getTraducao(idSite, palavra, chave);
             return response;
         }
     }
