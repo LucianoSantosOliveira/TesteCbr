@@ -35,7 +35,6 @@ namespace TesteCbr.DbContext
                         while (reader.Read())
                         {
                             var traducao = new TraducaoModel();
-                            var t = reader.Cast<TraducaoModel>();
                             traducao.Id = int.Parse(reader["ID"].ToString());
                             traducao.PreferredLabel = reader["Preferred Label"].ToString();
                             traducao.Traducao = reader["Traducao"].ToString();
